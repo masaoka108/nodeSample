@@ -1,0 +1,28 @@
+extends ../layout/default
+
+block scripts
+  script(src='/socket.io/socket.io.js')
+  script(src='/jquery/dist/jquery.js')
+
+  //- script(src='/jquery2.js')
+  //- script(src='/pets2.js')
+  script(type='text/javascript').
+    var socket = io.connect('http://localhost:8080'); // C02. ソケットへの接続
+    //var socket = io.connect(); // C02. ソケットへの接続
+
+    // C04. server_to_clientイベント・データを受信する
+    socket.on("server_to_client", function(data){
+      //appendMsg(data.value)
+      alert(data.value);
+    });
+
+
+    //- index.html
+
+block content
+  h1= title + ''
+  p #{username}
+  //- p Welcome 2 #{title}
+  // p Here is
+
+  //- script(src='/socket.io-client/dist/socket.io.js')

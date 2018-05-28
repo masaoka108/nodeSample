@@ -1,0 +1,22 @@
+//- default.pug
+html
+  head
+    title My Site - #{title}
+    block scripts
+      script(src='/jquery.js')
+  body
+    block header
+      #header
+        //- p(class=['cTest', 'cTest2'], style={color: 'red', background: 'green'}) Menu
+        div(style={float:'left',width:200})
+          ul
+            li: a(href="//" + hostname + "/users/" target="_self") ユーザー 一覧
+            li: a(href="//" + hostname + "/users/" target="_self") 申請データ一覧
+            li: a(href="//" + hostname + "/users/" target="_self") お知らせ管理
+            li: a(href="//" + hostname + "/users/" target="_self") ログアウト
+
+
+    block content
+    block foot
+      #footer
+        p ここはフッター

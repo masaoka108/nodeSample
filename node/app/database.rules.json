@@ -1,0 +1,14 @@
+{
+  "rules": {
+    ".read": true,
+    ".write": true,
+    "$uid": {
+      ".indexOn": "year_month"
+    },
+    "medical_data": {
+      "$uid": {
+        ".indexOn": "timestamp"
+      }
+    }
+  }
+}

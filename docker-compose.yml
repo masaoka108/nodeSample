@@ -9,3 +9,4 @@ services:
       - ./node/app:/app
     ports:
       - "8080:3000"
+      - "9005:9005"
