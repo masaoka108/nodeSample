@@ -1,22 +1,59 @@
 //- default.pug
 html
   head
-    title My Site - #{title}
+    title Clinic - #{title}
+    meta(name='viewport', content='width=device-width initial-scale=1')
+
     block scripts
-      script(src='/jquery.js')
+      link(rel='stylesheet', href='/bootstrap/dist/css/bootstrap.min.css')
+      script(src='/bootstrap/dist/js/bootstrap.min.js')
+      script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js')
+      script(src='/jquery/dist/jquery.js')  
+
+    block scriptsView
+
   body
-    block header
-      #header
-        //- p(class=['cTest', 'cTest2'], style={color: 'red', background: 'green'}) Menu
-        div(style={float:'left',width:200})
-          ul
-            li: a(href="//" + hostname + "/users/" target="_self") ユーザー 一覧
-            li: a(href="//" + hostname + "/users/" target="_self") 申請データ一覧
-            li: a(href="//" + hostname + "/users/" target="_self") お知らせ管理
-            li: a(href="//" + hostname + "/users/" target="_self") ログアウト
+
+    div(class="container-fluid")
+      div(class="row", style="padding:20px 20px 20px 20px")
+        div(class="col-md-2", style="padding:0px")
+          p(style="background-color:white") clinic ロゴ
+
+          //- nav(class="navbar navbar-expand navbar-light flex-md-column flex-row align-items-start", style="background-color: #e3f2fd;")
+          nav(class="navbar navbar-expand navbar-dark bg-dark flex-md-column flex-row align-items-start")
+            div(class="collapse navbar-collapse")
+              ul(class="flex-md-column flex-row navbar-nav w-100 justify-content-between")
+                li(class="nav-item")
+                  a(class="nav-link pl-0", href="//" + hostname + "/users/") ユーザー 一覧
+                li(class="nav-item")
+                  a(class="nav-link pl-0" href="#") 申請データ一覧
+                li(class="nav-item")
+                  a(class="nav-link pl-0" href="#") お知らせ管理
+                li(class="nav-item")
+                  a(class="nav-link pl-0" href="//" + hostname + "/systemUsers/") システムユーザー 一覧
+                li(class="nav-item")
+                  a(class="nav-link pl-0" href="//" + hostname + "/systemUsers/logout") ログアウト
+
+        div(class="col-md-10", style="background-color:white")
+          block content
+
+        //- div(class="col-md-3", style="background-color:#00f0f0")
+        //-   right
 
 
-    block content
-    block foot
-      #footer
-        p ここはフッター
+        //- block header
+        //-   #header
+        //-     //- p(class=['cTest', 'cTest2'], style={color: 'red', background: 'green'}) Menu
+        //- 
+        //-     //- div(style={float:'left',width:200})
+        //-     //-   ul
+        //-     //-     li: a(href="//" + hostname + "/users/" target="_self") ユーザー 一覧
+        //-     //-     li: a(href="//" + hostname + "/users/" target="_self") 申請データ一覧
+        //-     //-     li: a(href="//" + hostname + "/users/" target="_self") お知らせ管理
+        //-     //-     li: a(href="//" + hostname + "/users/" target="_self") ログアウト
+        //- 
+        //- 
+        //- block content
+        block foot
+          #footer
+            p ここはフッター

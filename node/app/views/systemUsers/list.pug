@@ -1,0 +1,50 @@
+extends ../layout/default
+
+block scriptsView
+  script(src='/socket.io/socket.io.js')
+
+  script(type='text/javascript').
+    $(function () {
+      var socket = io();
+      $('form').submit(function(){
+        socket.emit('chat message', $('#m').val());
+        $('#m').val('');
+        return false;
+      });
+      socket.on('chat message', function(msg){
+        console.log('chat client');
+        console.log(msg);
+        alert(msg);
+        $('#pUsername').text(msg);
+        return false;
+      });
+    });
+
+block content
+  h3= title
+
+  //- button(type="button" class="btn btn-primary" style="margin-bottom:10px") 新規登録
+  a(class='button' class="btn btn-primary" style="margin-bottom:10px" href="//" + hostname + "/systemUsers/edit") 新規登録
+  
+  table(class="table")
+    thead(class="thead-dark")
+      tr
+        th メールアドレス
+        th 名前
+        //- th パスワード
+        th 操作
+    tbody
+    if systemUsers
+      each systemUser, key in systemUsers
+        tr  
+          td #{systemUser.mail}
+          td #{systemUser.name}
+          //- td #{systemUser.password}
+          td
+            button(type="button", class="btn btn-outline-secondary") 修正
+
+  //- for (key in systemUsers){
+  //-   p key;
+  //- }
+
+  //- p#pUsername #{username}

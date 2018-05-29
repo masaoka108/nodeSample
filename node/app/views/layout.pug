@@ -1,7 +1,15 @@
-doctype html
 html
   head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    //- title My Site - #{title}
+    //- meta(name='viewport', content='width=device-width initial-scale=1')
+
+    block scripts
+      //- link(rel='stylesheet', href='/bootstrap/dist/css/bootstrap.min.css')
+      //- script(src='/bootstrap/dist/js/bootstrap.min.js')
+      //- script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js')
+      //- script(src='/jquery/dist/jquery.js')  
+
+    block scriptsView
+
   body
     block content

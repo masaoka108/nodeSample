@@ -8,6 +8,19 @@ var app = require('../app');
 var debug = require('debug')('app:server');
 var http = require('http');
 
+// /**
+//  * Middleware Function
+//  */
+//  //******** root URI を定義
+// var setRootUri = function (req, res, next) {
+//   var hostname = req.headers.host;
+//   console.log("setRootUri");
+//   console.log(hostname);
+//   app.set('hostname', hostname);
+//   next()
+// }
+// app.use(setRootUri)
+
 /**
  * Get port from environment and store in Express.
  */
@@ -18,7 +31,6 @@ app.set('port', port);
 /**
  * Create HTTP server.
  */
-
 var server = http.createServer(app);
 
 
@@ -28,7 +40,6 @@ var server = http.createServer(app);
 console.log("www");
 var io = app.io
 io.attach(server);
-
 
 
 

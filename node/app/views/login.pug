@@ -5,4 +5,20 @@ block scripts
   // script(src='/pets.js')
 
 block content
-  h1= title
+  //- h1= title
+
+
+html(lang="ja")
+  head
+    title Clinic - #{title}
+    meta(charset="UTF-8")
+
+  body
+    h3= title
+    form(action="./" method="POST")
+      div
+        input(type="text" name="mail" placeholder="メールアドレス")
+        br
+        input(type="password" name="password" placeholder="パスワード")
+      div
+        button(type="submit") ログイン
