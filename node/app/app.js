@@ -9,7 +9,7 @@ var app = express();
 
 var session = require('express-session');
 
-//******** セッションの設定を行います.
+//******** セッションの設定
 app.use(session({
 
     // 必須項目（署名を行うために使います）
@@ -35,29 +35,8 @@ app.use(session({
     }
 }));
 
-//login.check()
+//******** ログインしているかチェック
 app.use(login.check)
-//
-// app.get('/', (req, res) => {
-//
-//     // セッションから値を読み込みます.
-//     // ここではJavaScriptのオブジェクトをセッションに入れています.
-//     let user = req.session.user || { prevAccess : null, pv : 1 };
-//
-//     // 前回のアクセス日時
-//     let prevAccess = user.prevAccess;
-//
-//     // ユーザーごとのPageView
-//     let pv = user.pv;
-//
-//     // 今回アクセス分を更新して、セッションに保存します.
-//     user.pv += 1;
-//     user.prevAccess = new Date();
-//     req.session.user = user;
-//
-//     // レスポンス返却
-//     res.send(`Hello from express4! pv=${pv}, prevAccess=${prevAccess}`);
-// });
 
 //******** routes
 var indexRouter = require('./routes/index');

@@ -1,18 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-// router.get('/', sessionCheck);
-//
-// // loginしてる場合はindex pageへ、してない場合はlogin pageへ
-// function sessionCheck(req, res, next) {
-//     if (req.session.user) {
-//         //res.render('users', { title: req.session.user.name});
-//         next()
-//     } else {
-//         res.redirect('/');
-//     }
-// };
-
 /**
 * ユーザー一覧
 */
@@ -24,29 +12,26 @@ router.get('/', function(req, res) {
 
   //******** Firebase Realtime DBのデータを取得
   //**** 1回だけの読み取り
-  // var userId = firebase.auth().currentUser.uid;
+  return firebase.database().ref('/users')
+    .once('value').then(function(snapshot) {
+      var users = snapshot.val();
+
+      res.render('users/list', { title: 'ユーザー 一覧', hostname: hostname, users:users });
+    });
+
+  // //**** observe
+  // var username = "";
   // var userId = "6BLRrWLBNEZfqaGYC1YKxPGIgtI3";
-  // return firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
-  //   var username = (snapshot.val() && snapshot.val().profiles.name) || 'Anonymous';
-  //   console.log(username);
-  //   console.log(snapshot.val().profiles.birthday);
+  // firebase.database().ref('/users/' + userId).on('value',function(snapshot) {
+  //     username = (snapshot.val() && snapshot.val().profiles.name) || 'Anonymous';
+  //     console.log(username);
+  //     console.log(snapshot.val().profiles.birthday);
   //
-  //   res.render('users/list', { title: 'ユーザー 一覧', hostname: hostname });
+  //     //******** WebSocket でクライアント側を実行
+  //     req.app.io.emit('chat message', username);
   // });
-
-  //**** observe
-  var username = "";
-  var userId = "6BLRrWLBNEZfqaGYC1YKxPGIgtI3";
-  firebase.database().ref('/users/' + userId).on('value',function(snapshot) {
-      username = (snapshot.val() && snapshot.val().profiles.name) || 'Anonymous';
-      console.log(username);
-      console.log(snapshot.val().profiles.birthday);
-
-      //******** WebSocket でクライアント側を実行
-      req.app.io.emit('chat message', username);
-  });
-
-  res.render('users/list', { title: 'ユーザー 一覧', hostname: hostname, username: username });
+  //
+  // res.render('users/list', { title: 'ユーザー 一覧', hostname: hostname, username: username });
 
 });
 
@@ -56,10 +41,20 @@ router.get('/', function(req, res) {
 * ユーザー 詳細
 * @param {int} id ユーザーID
 */
-router.get('/:id', function (req, res, next) {
-    res.render('users/detail', { title: 'ユーザー 一覧', id: req.params.id });
-    //res.send('ID:' + req.params.id);
-    next();
+router.get('/profile/:id', function (req, res, next) {
+  var hostname = req.headers.host;
+  var firebase = req.app.get('firebase');
+  var database = req.app.get('database');
+
+  return firebase.database().ref(`/users/${req.params.id}`)
+    .once('value').then(function(snapshot) {
+      var user = snapshot.val();
+      console.log(user);
+      res.render('users/profile', { title: 'ユーザー プロフィール', hostname: hostname, id: req.params.id, user: user });
+    });
+
+  //res.send('ID:' + req.params.id);
+  //next();
 });
 
 module.exports = router;

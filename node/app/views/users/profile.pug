@@ -1,0 +1,37 @@
+extends ../layout/default
+
+block scriptsView
+
+block content
+  h3= title
+
+  div(class="form-group")
+    form(name="formUser", method="POST", action="./profile")
+      table(class="table", style="border:solid 1px #dee2e6;")
+        tbody(class="thead-dark")
+          tr
+            th メールアドレス
+            td 
+              p #{user.profiles.email}
+          tr
+            th(style="width:200px") 名前
+            td
+              p #{user.profiles.name}
+          tr
+            th 名前(カナ)
+            td
+              p #{user.profiles.nameKana}
+          tr
+            th 誕生日
+            td 
+              p #{user.profiles.birthday}
+          tr
+            th 血液型
+            td 
+              p #{user.profiles.bloodType}
+          tr
+            th 申請データ
+            td 
+  
+      //- button(type="submit", class="btn btn-primary" style="width:100px") 登録
+      //- p user id: #{id}

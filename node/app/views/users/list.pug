@@ -2,10 +2,6 @@ extends ../layout/default
 
 block scriptsView
   script(src='/socket.io/socket.io.js')
-  script(src='/jquery/dist/jquery.js')  
-
-  //- script(src='/jquery2.js')
-  //- script(src='/pets2.js')
   script(type='text/javascript').
     $(function () {
       var socket = io();
@@ -23,28 +19,26 @@ block scriptsView
       });
     });
 
-
-    //var socket = io.connect('http://localhost:8080'); // C02. ソケットへの接続
-    //var socket = io.connect(); // C02. ソケットへの接続
-
-    // C04. server_to_clientイベント・データを受信する
-    //socket.on("server_to_client", function(data){
-    //  //appendMsg(data.value)
-    //  alert(data.value);
-    //  console.log('onで受け');
-    //  console.log(data.value);
-    //});
-
-
-
-
-    //- index.html
-
 block content
-  h1= title + ''
-  p#pUsername #{username}
+  h4= title
 
-  //- ul#messages
-  //- form(name="test-form", method="get", action="")
-  //-   input#m
-  //-   button send
+  //a(class='button' class="btn btn-primary" style="margin-bottom:10px" href="//" + hostname + "/systemUsers/edit") 新規登録
+  
+  table(class="table")
+    thead(class="thead-dark")
+      tr
+        th メールアドレス
+        th 名前
+        th 性別
+        th(style="width:100px") 操作
+    tbody
+    if users
+      each user, key in users
+        tr  
+          td #{user.profiles.email}
+          td #{user.profiles.name}
+          td #{user.profiles.gender}
+          td
+            a(class='button' class="btn btn-success" style="margin-right:5px" href="//" + hostname + "/users/profile/" + key target="_blank") チャット
+            a(class='button' class="btn btn-primary" style="margin-right:5px" href="//" + hostname + "/users/profile/" + key target="_blank") 申請データ
+            a(class='button' class="btn btn-info" style="margin-right:5px" href="//" + hostname + "/users/profile/" + key target="_blank") プロフィール
