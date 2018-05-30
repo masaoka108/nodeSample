@@ -155,10 +155,10 @@ app.set('socketio', io);
 //******** firebase
 var firebase = require("firebase");
 var config = {
-  apiKey: "AIzaSyBTJ2OLkTaG1nLYlE2CpNOHsHE_Sq7Y_0A",
-  authDomain: "drchat-e7a2b.firebaseapp.com",
-  databaseURL: "https://drchat-e7a2b.firebaseio.com/",
-  storageBucket: "gs://drchat-e7a2b.appspot.com",
+  apiKey: "<apiKey>",
+  authDomain: "<authDomain>",
+  databaseURL: "<URL>",
+  storageBucket: "<storage>",
 };
 firebase.initializeApp(config);
 var database = firebase.database();
